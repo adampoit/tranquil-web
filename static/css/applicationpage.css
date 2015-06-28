@@ -1,0 +1,116 @@
+tml, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+@font-face {
+  font-family: 'sansation_lightregular';
+  src: url('../fonts/sansation_light-webfont.eot');
+  src: url('../fonts/sansation_light-webfont.eot?#iefix') format('embedded-opentype'),
+       url('../fonts/sansation_light-webfont.woff2') format('woff2'),
+       url('../fonts/sansation_light-webfont.woff') format('woff'),
+       url('../fonts/sansation_light-webfont.ttf') format('truetype'),
+       url('../fonts/sansation_light-webfont.svg#sansation_lightregular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'adam.cg_proregular';
+  src: url('../fonts/adam.cg_pro-webfont.eot');
+  src: url('../fonts/adam.cg_pro-webfont.eot?#iefix') format('embedded-opentype'),
+       url('../fonts/adam.cg_pro-webfont.woff2') format('woff2'),
+       url('../fonts/adam.cg_pro-webfont.woff') format('woff'),
+       url('../fonts/adam.cg_pro-webfont.ttf') format('truetype'),
+       url('../fonts/adam.cg_pro-webfont.svg#adam.cg_proregular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  background-color: #eee;
+  color: #333;
+  font-family: 'Lato', sans-serif;
+}
+
+h2 {
+  color: #294888;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+#content {
+  max-width: 900px;
+  margin: 100px auto;
+  text-align: left;
+}
+
+#content li {
+  list-style: none;
+  padding: 15px;
+}
+
+#content li.application {
+  font-size: 1.25em;
+  background: #ddd;
+  border-radius: 25px;
+  -webkit-border-radius: 25px;
+  -moz-border-radius: 25px;
+  margin-bottom: 25px;
+}
+
+#content .application div.toggle {
+  float: right;
+  width: 30px;
+  text-align: center;
+}
+
+.button {
+  font-family: 'adam.cg_proregular';
+  background: #333;
+  color: #aaa;
+  display: inline-block;
+  padding: 10px;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  margin: 5px;
+  text-decoration: none;
+  border: none;
+  outline: none;
+}
+
+.button.selected {
+  background: #294888;
+}
+
+.button:hover {
+  background: #294888;
+  cursor: hand;
+}
+
+#applicationList .questionList p.question {
+  font-weight: bold;
+}
+
+#applicationList .questionList li:not(:first-child) {
+  display: none;
+}
+
+#applicationList
