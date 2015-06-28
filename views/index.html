@@ -11,19 +11,19 @@
       $(document).ready(function () {
         $(".about-link").click(function () {
          $('html, body').animate({
-             scrollTop: $("#about").offset().top
+           scrollTop: $("#about").offset().top
          }, 650);
         });
 
         $(".progress-link").click(function () {
          $('html, body').animate({
-             scrollTop: $("#progress").offset().top
+           scrollTop: $("#progress").offset().top
          }, 650);
         });
 
         $(".application-link").click(function () {
          $('html, body').animate({
-             scrollTop: $("#application").offset().top
+           scrollTop: $("#application").offset().top
          }, 650);
         });
 
@@ -31,7 +31,7 @@
         $('#progress #scrollRight').click(function () {
           position += 900;
           if (position > 3600)
-              position = 0;
+            position = 0;
 
           $('#progress #scrollContainer').scrollLeft(position);
         });
@@ -39,7 +39,7 @@
         $('#progress #scrollLeft').click(function () {
           position -= 900;
           if (position < 0)
-              position = 3600;
+            position = 3600;
 
           $('#progress #scrollContainer').scrollLeft(position);
         });
@@ -52,14 +52,14 @@
         });
 
         $('#appForm').validate({
-					rules:
-					{
-						battleTag:
-						{
-							required: true,
-							minlength: 5,
-							nowhitespace: true
-						},
+          rules:
+          {
+            battleTag:
+            {
+              required: true,
+              minlength: 5,
+              nowhitespace: true
+            },
 						armoryLink:
 						{
 							required: true,
