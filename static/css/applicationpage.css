@@ -56,29 +56,9 @@ h2 {
 }
 
 #content {
-  max-width: 900px;
+  width: 1100px;
   margin: 100px auto;
   text-align: left;
-}
-
-#content li {
-  list-style: none;
-  padding: 15px;
-}
-
-#content li.application {
-  font-size: 1.25em;
-  background: #ddd;
-  border-radius: 25px;
-  -webkit-border-radius: 25px;
-  -moz-border-radius: 25px;
-  margin-bottom: 25px;
-}
-
-#content .application div.toggle {
-  float: right;
-  width: 30px;
-  text-align: center;
 }
 
 .button {
@@ -86,11 +66,12 @@ h2 {
   background: #333;
   color: #aaa;
   display: inline-block;
-  padding: 10px;
   border-radius: 5px;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   margin: 5px;
+  padding: 7px;
+  font-size: 0.6em;
   text-decoration: none;
   border: none;
   outline: none;
@@ -105,12 +86,76 @@ h2 {
   cursor: hand;
 }
 
-#applicationList .questionList p.question {
+#content ul#nav, #content ul#applications {
+  list-style: none;
+  display: inline-block;
+  vertical-align: top;
+}
+
+#nav {
+  width: 125px;
+}
+
+#nav li {
+  background: #ddd;
+  padding: 10px 15px;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  margin-bottom: 5px;
+}
+
+#nav li.selected {
   font-weight: bold;
 }
 
-#applicationList .questionList li:not(:first-child) {
+#nav a {
+  text-decoration: none;
+}
+
+#applications {
+  width: 950px;
+  padding-left: 20px;
+}
+
+#applications li.application {
+  font-size: 1.25em;
+  background: #ddd;
+  margin-bottom: 5px;
+  position: relative;
   display: none;
 }
 
-#applicationList
+#applications.pending li.pending,
+#applications.approved li.approved,
+#applications.declined li.declined {
+  display: block;
+}
+
+#applications .application div.actions {
+  float: right;
+  top: 10px;
+  right: 10px;
+  position: absolute;
+}
+
+#applications .questionList {
+  list-style: none;
+  padding: 15px;
+}
+
+#applications .questionList li:not(:first-child) {
+  display: none;
+  margin-top: 25px;
+}
+
+#applications .questionList li:nth-child(2) {
+  border-top: 1px solid #aaa;
+  margin-top: 10px;
+  padding-top: 25px;
+}
+
+#applications .questionList li:first-child > * {
+  display: inline-block;
+  cursor: pointer;
+}

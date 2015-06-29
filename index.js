@@ -12,7 +12,7 @@ var express = require('express'),
       if (field.type == "BIT" && field.length == 1) {
         var bit = field.string();
 
-        return (bit === null) ? null : bit.charCodeAt(0);
+        return (bit === null) ? "pending" : bit.charCodeAt(0) === 1 ? "approved" : "declined";
       }
 
       return next();
@@ -80,7 +80,7 @@ app.get('/applications', auth, function (request, response) {
     if (error)
       throw error;
 
-    connection.query('SELECT contents, approved FROM applications', function (error, results) {
+    connection.query('SELECT id, contents, approved FROM applications', function (error, results) {
       if (error)
         throw error;
 
@@ -88,6 +88,7 @@ app.get('/applications', auth, function (request, response) {
         applications: _.map(results, function (result) {
           var application = JSON.parse(result.contents.toString('utf8'));
           application['approved'] = result.approved;
+          application['id'] = result.id;
 
           return application;
         })
@@ -97,5 +98,35 @@ app.get('/applications', auth, function (request, response) {
 
       connection.release();
     });
-  })
+  });
+});
+
+app.get('/applications/:id/approve', auth, function (request, response) {
+  var id = request.params.id;
+  pool.getConnection(function (error, connection) {
+    if (error)
+      throw error;
+
+    connection.query('UPDATE applications SET approved = ? WHERE id = ?', [1, id], function (error, results) {
+      if (error)
+        throw error;
+
+      response.sendStatus(200);
+    });
+  });
+});
+
+app.get('/applications/:id/decline', auth, function (request, response) {
+  var id = request.params.id;
+  pool.getConnection(function (error, connection) {
+    if (error)
+      throw error;
+
+    connection.query('UPDATE applications SET approved = ? WHERE id = ?', [0, id], function (error, results) {
+      if (error)
+        throw error;
+
+      response.sendStatus(200);
+    });
+  });
 });

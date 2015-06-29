@@ -9,23 +9,63 @@
     <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.0/additional-methods.min.js"></script>
     <script>
       $(document).ready(function () {
-        $(".toggle").click(function () {
-          $(this).next().find('li:not(:first-child)').toggle();
+        $(".questionList li:first-child").click(function () {
+          $(this).siblings('li:not(:first-child)').toggle();
+        });
 
-          if ($(this).text() == '+')
-            $(this).text('-');
-          else
-            $(this).text('+');
+        $('#nav li').click(function () {
+          $('#nav .selected').removeClass('selected');
+          $(this).addClass('selected');
+
+          $('#applications').removeAttr('class').addClass($(this).attr('id'));
+        });
+
+        $('#applications .approve').click(function () {
+          var application = $(this).parents('.application');
+
+          $.ajax({
+            type: 'GET',
+            url: '/applications/' + application.attr('id') + '/approve',
+            success: function () {
+              application.removeClass('pending approved declined').addClass('approved');
+            }
+          });
+        });
+
+        $('#applications .decline').click(function () {
+          var application = $(this).parents('.application');
+
+          $.ajax({
+            type: 'GET',
+            url: '/applications/' + application.attr('id') + '/decline',
+            success: function () {
+              application.removeClass('pending approved declined').addClass('declined');
+            }
+          });
         });
       });
     </script>
   </head>
   <body>
     <div id="content">
-      <ul id="applicationList">
+      <ul id="nav">
+        <li id="pending" class="selected">
+          <a href="javaScript:void(0);" id="pending-link">Pending</a>
+        </li>
+        <li id="approved">
+          <a href="javaScript:void(0);" id="approved-link">Approved</a>
+        </li>
+        <li id="declined">
+          <a href="javaScript:void(0);" id="declined-link">Declined</a>
+        </li>
+      </ul>
+      <ul id="applications" class="pending">
         {{#each applications}}
-          <li class="application">
-            <div class="button toggle">+</div>
+          <li id="{{ this.id }}" class="application {{ this.approved }}">
+            <div class="actions">
+              <div class="button approve">Approve</div>
+              <div class="button decline">Decline</div>
+            </div>
             <ul class="questionList">
               {{#each this.questions}}
                 <li>
