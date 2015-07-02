@@ -1,0 +1,354 @@
+tml, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+@font-face {
+  font-family: 'sansation_lightregular';
+  src: url('../fonts/sansation_light-webfont.eot');
+  src: url('../fonts/sansation_light-webfont.eot?#iefix') format('embedded-opentype'),
+       url('../fonts/sansation_light-webfont.woff2') format('woff2'),
+       url('../fonts/sansation_light-webfont.woff') format('woff'),
+       url('../fonts/sansation_light-webfont.ttf') format('truetype'),
+       url('../fonts/sansation_light-webfont.svg#sansation_lightregular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'adam.cg_proregular';
+  src: url('../fonts/adam.cg_pro-webfont.eot');
+  src: url('../fonts/adam.cg_pro-webfont.eot?#iefix') format('embedded-opentype'),
+       url('../fonts/adam.cg_pro-webfont.woff2') format('woff2'),
+       url('../fonts/adam.cg_pro-webfont.woff') format('woff'),
+       url('../fonts/adam.cg_pro-webfont.ttf') format('truetype'),
+       url('../fonts/adam.cg_pro-webfont.svg#adam.cg_proregular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  background-color: #eee;
+  color: #333;
+  font-family: 'Lato', sans-serif;
+}
+
+.section {
+  min-height: 100vh;
+}
+
+.content {
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 150px 0 50px;
+}
+
+.content p, .content ul {
+  margin-bottom: 25px;
+  font-size: 1.25em;
+}
+
+.content .column {
+  text-align: left;
+  display: inline-block;
+  width: 35%;
+  margin: 50px;
+  vertical-align: top;
+}
+
+.button {
+  font-family: 'adam.cg_proregular';
+  background: #333;
+  color: #aaa;
+  display: inline-block;
+  padding: 10px;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  margin: 5px;
+  text-decoration: none;
+  border: none;
+  outline: none;
+}
+
+.button.selected {
+  background: #294888;
+}
+
+.button:hover {
+  background: #294888;
+  cursor: hand;
+}
+
+h1 {
+  font-family: 'adam.cg_proregular';
+  color: #294888;
+  font-size: 2.5em;
+  margin-bottom: 50px;
+}
+
+h2 {
+  color: #294888;
+  font-size: 1.5em;
+  margin-bottom: 30px;
+  font-weight: bold;
+}
+
+#cover {
+  background: url(../images/bg.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+#center-logo {
+  position: absolute;
+  margin: auto;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 404px;
+  height: 178px;
+  text-align: center;
+}
+
+#center-logo img {
+  margin-bottom: 35px;
+}
+
+#center-logo span {
+  font-family: 'sansation_lightregular';
+  font-size: 2em;
+  color: #ccc;
+}
+
+#front-nav {
+  position: absolute;
+  top: 40;
+  right: 40;
+  font-family: 'sansation_lightregular';
+  font-size: 1.2em;
+  color: #ccc;
+}
+
+#main-nav {
+  position: fixed;
+  top: 0;
+  right: 0;
+  font-family: 'sansation_lightregular';
+  font-size: 1.2em;
+  color: #ccc;
+  background-color: #111;
+  width: 100%;
+  text-align: right;
+  padding: 20px;
+  display: none;
+  z-index: 1;
+}
+
+.nav a, .nav a:visited {
+  color: #ccc;
+  text-decoration: none;
+}
+
+.nav a:hover {
+  color: #294888;
+}
+
+.nav li {
+  display: inline;
+  list-style-type: none;
+}
+
+.nav li + li:before {
+  content: " | ";
+  padding: 0 10px;
+}
+
+#icon {
+  position: fixed;
+  top: 15;
+  left: 20;
+  display: none;
+  z-index: 2;
+}
+
+#progress .content {
+  position: relative;
+}
+
+#progress #scrollContainer {
+  width: 900px;
+  overflow: hidden;
+  margin-top: 25px;
+}
+
+#progress .scrollButton {
+  font-size: 7.0em;
+  position: absolute;
+  top: 380px;
+}
+
+#progress .scrollButton a, #progress .scrollButton a:visited {
+  color: #ccc;
+  text-decoration: none;
+}
+
+#progress .scrollButton a:hover {
+  color: #294888;
+}
+
+#progress #scrollRight {
+  right: -25px;
+}
+
+#progress #scrollLeft {
+  left: -25px;
+}
+
+#progress ul {
+  width: 4500px;
+}
+
+#progress ul div {
+  width: 900px;
+  float: left;
+}
+
+#progress li {
+  display: inline-block;
+  list-style-type: none;
+  position: relative;
+}
+
+#progress li img {
+  width: 200px;
+  margin: 25px;
+  border: 10px solid #333;
+  border-radius: 500px;
+  -webkit-border-radius: 500px;
+  -moz-border-radius: 500px;
+  background: #333;
+  -webkit-filter: grayscale(100%);
+  filter: grayscale(100%);
+}
+
+#progress ul.normal li.normal img,
+#progress ul.heroic li.heroic img,
+#progress ul.mythic li.mythic img {
+  border-color: #294888;
+  background: #294888;
+  -webkit-filter: none;
+  filter: none;
+}
+
+#progress li span {
+  top: 65%;
+  left: 50%;
+  position: absolute;
+  transform: translate(-50%, -65%);
+  font-family: 'adam.cg_proregular';
+  color: #aaa;
+  font-size: 1.1em;
+  padding: 5px;
+}
+
+#application #appForm {
+  text-align: left;
+}
+
+#application ul {
+  margin-bottom: 25px;
+}
+
+#application li {
+  list-style-type: none;
+  padding: 25px;
+  text-align: left;
+}
+
+#application li:after {
+  content: '';
+  display: block;
+  clear: both;
+}
+
+#application li + li {
+  border-top: 1px solid #ccc;
+}
+
+#application label {
+  max-width: 50%;
+  display: inline-block;
+  padding: 10px;
+}
+
+#application label.error {
+  color: red;
+}
+
+#application input[type="text"], #application textarea {
+  background: -webkit-gradient(linear, center top, center bottom, color-stop(0%, #222), color-stop(100%, #111));
+  background: -moz-linear-gradient(top, #222, #111);
+  border: none;
+  color: #999;
+  float: right;
+  padding: 10px;
+  width: 300px;
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+#application .radioGroup {
+  width: 300px;
+  float: right;
+  text-align: center;
+}
+
+#application .radioGroup span {
+  padding: 25px;
+}
+
+#application .radioGroup span input {
+  margin-right: 10px;
+}
+
+#application textarea {
+  resize: vertical;
+  height: 100px;
+}
+
+#application input:focus, #application textarea:focus {
+  outline: none;
+}
+
+#application #submitApp {
+  text-align: center;
+}
+
+#application #submitApp .button {
+  font-size: 1.25em;
+  padding: 15px;
+}
+
+#applicationList .questionList p.question {
+  font-weight: bold;
+}
