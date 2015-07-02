@@ -11,9 +11,9 @@ gulp.task('install', function () {
     .pipe(install());
 });
 
-gulp.task('build', ['clean'], function () {
+gulp.task('build', ['clean', 'install'], function () {
   return gulp.src('content/**/*')
     .pipe(gulp.dest('static'));
 });
 
-gulp.task('default', ['install', 'build']);
+gulp.task('default', ['build']);
