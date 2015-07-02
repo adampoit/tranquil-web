@@ -5,9 +5,9 @@ gulp.task('clean', function (cb) {
   del(['build'], cb);
 });
 
-gulp.task('copy', ['clean'], function () {
+gulp.task('build', ['clean'], function () {
   return gulp.src('src/**/*')
     .pipe(gulp.dest('build'));
 });
 
-gulp.task('default', ['copy']);
+gulp.task('default', ['build']);
