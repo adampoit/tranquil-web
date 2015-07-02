@@ -1,7 +1,7 @@
 var gulp = require('gulp'),
   del = require('del'),
   install = require('gulp-install'),
-  exec = require('child_process').exec;
+  shell = require('gulp-shell');
 
 gulp.task('clean', function (cb) {
   del(['static'], cb);
@@ -17,11 +17,8 @@ gulp.task('build', ['clean', 'install'], function () {
     .pipe(gulp.dest('static'));
 });
 
-gulp.task('deploy', ['build'], function (cb) {
-  exec('../deploy.sh', function (err, stdout, stderr) {
-    if (err !== null)
-      cb(err);
-  });
-});
+gulp.task('deploy', ['build'], shell.task([
+  '../deploy.sh'
+]));
 
 gulp.task('default', ['build']);
