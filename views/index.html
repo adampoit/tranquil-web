@@ -1,0 +1,363 @@
+<html>
+  <head>
+    <title>Tranquil</title>
+    <link rel="stylesheet" href="/static/css/main.css" type="text/css" charset="utf-8" />
+    <link rel="icon" type="image/png" href="/static/images/tranquil.ico" />
+    <link href='http://fonts.googleapis.com/css?family=Lato:300' rel='stylesheet' type='text/css'>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.0/jquery.validate.min.js"></script>
+	  <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.0/additional-methods.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        $(".about-link").click(function () {
+         $('html, body').animate({
+           scrollTop: $("#about").offset().top
+         }, 650);
+        });
+
+        $(".progress-link").click(function () {
+         $('html, body').animate({
+           scrollTop: $("#progress").offset().top
+         }, 650);
+        });
+
+        $(".application-link").click(function () {
+         $('html, body').animate({
+           scrollTop: $("#application").offset().top
+         }, 650);
+        });
+
+        var position = 0;
+        $('#progress #scrollRight').click(function () {
+          position += 900;
+          if (position > 3600)
+            position = 0;
+
+          $('#progress #scrollContainer').scrollLeft(position);
+        });
+
+        $('#progress #scrollLeft').click(function () {
+          position -= 900;
+          if (position < 0)
+            position = 3600;
+
+          $('#progress #scrollContainer').scrollLeft(position);
+        });
+
+        $('#difficulty .button').click(function () {
+          $('#difficulty .selected').removeClass('selected');
+          $(this).addClass('selected');
+
+          $('#progression').removeAttr('class').addClass($(this).attr('id'));
+        });
+
+        $('#appForm').validate({
+          rules:
+          {
+            battleTag:
+            {
+              required: true,
+              minlength: 5,
+              nowhitespace: true
+            },
+						armoryLink:
+						{
+							required: true,
+							url: true
+						},
+            progress:
+            {
+              required: true
+            },
+            about:
+            {
+              required: true
+            },
+            hearAboutUs:
+            {
+              required: true
+            },
+            raidTimes:
+            {
+              required: true
+            },
+            guildList:
+            {
+              required: true
+            },
+            performance:
+            {
+              required: true
+            },
+            talents:
+            {
+              required: true
+            },
+            logs:
+            {
+              required: true
+            },
+            ui:
+            {
+              required: true,
+              url: true
+            },
+            uiexplain:
+            {
+              required: true
+            },
+            computerspecs:
+            {
+              required: true
+            },
+            pingtest:
+            {
+              required: true
+            },
+            epgp:
+            {
+              required: true
+            },
+            mumble:
+            {
+              required: true
+            }
+					},
+          submitHandler: function (form) {
+            var application = {
+              questions: $('#appForm li').map(function () {
+                return {
+                  question: $(this).find('label:not(.error)').text(),
+                  answer: $(this).find(':input').val()
+                };
+              }).get()
+            };
+
+            $('#submitApp').html('Submitting Application...');
+
+            $.ajax({
+              type: 'POST',
+              url: '/applications',
+              data: JSON.stringify(application),
+              contentType: 'application/json',
+              success: function () {
+                $('#submitApp').html('Application submitted.');
+              }
+            });
+          }
+				});
+      });
+
+      $(document).scroll(function () {
+        var scrollPosition = $(document).scrollTop();
+        $('#main-nav, #icon').each(function () {
+          var threshold = $("#about").offset().top - 50;
+          if (scrollPosition > threshold)
+            $(this).fadeIn();
+          else
+            $(this).fadeOut();
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <div id="center-logo">
+      <img src="/static/images/logo.png" />
+      <span>Raid smarter, not harder.</span>
+    </div>
+    <div id="front-nav" class="nav">
+      <ul>
+        <li><a href="javaScript:void(0);" class="about-link">about</a></li>
+        <li><a href="javaScript:void(0);" class="progress-link">progress</a></li>
+        <li><a href="javaScript:void(0);" class="application-link">application</a></li>
+        <li><a href="https://www.warcraftlogs.com/guilds/22468/" target="_blank">logs</a></li>
+      </ul>
+    </div>
+    <div id="header">
+    </div>
+    <div id="main-nav" class="nav">
+      <ul>
+        <li><a href="javaScript:void(0);" class="about-link">about</a></li>
+        <li><a href="javaScript:void(0);" class="progress-link">progress</a></li>
+        <li><a href="javaScript:void(0);" class="application-link">application</a></li>
+        <li><a href="https://www.warcraftlogs.com/guilds/22468/" target="_blank">logs</a></li>
+      </ul>
+    </div>
+    <div id="icon">
+      <img src="/static/images/tranquil-icon.png" />
+    </div>
+    <div id="cover" class="section">
+    </div>
+    <div id="about" class="section">
+      <div class="content">
+        <h1>Welcome to Tranquil</h1>
+        <p>Tranquil is a mythic progression guild located on Hyjal-US that raids 3 nights a week.</p>
+        <p>A small, horde team that started at the beginning of Warlords of Draenor, we quickly progressed through Highmaul and Blackrock Foundry, gaining AOTC on Heroic difficulty, and quickly climbed the charts on Hyjal server. Our small team gained traction and we were able to get the 20 people necessary to get 4/7 Mythic Highmaul and 3/10 Mythic Blackrock Foundry.</p>
+        <p>The guild plans on progressing through Hellfire Citadel and future tiers.</p>
+        <h2>Raid Times</h2>
+        <p>Tuesday, Thursday, Sunday 6:30-9:30 PM PST</p>
+        <div class="column">
+          <h2>Currently Recruiting</h2>
+          <ul>
+            <li>Warlock</li>
+            <li>Enhancement Shaman</li>
+            <li>Balance Druid</li>
+          </ul>
+        </div>
+        <div class="column">
+          <h2>Contact</h2>
+          <ul>
+            <li>Sharlotta (Sharlotta #1796)</li>
+            <li>Austîn (alt code 140) (Austin#11909)</li>
+            <li>Ezia (BloodyElf#1777)</li>
+            <li>Kîsmet (alt code 140) (Kismet#1979)</li>
+          </ul>
+        </div>
+        <p>We are always looking for exceptional players to join our team.</p>
+      </div>
+    </div>
+    <div id="progress" class="section">
+      <div class="content">
+        <h1>Progress</h1>
+        <div id="difficulty">
+          <a id="normal" class="button" href="javaScript:void(0);">Normal</a>
+          <a id="heroic" class="button selected" href="javaScript:void(0);">Heroic</a>
+          <a id="mythic" class="button" href="javaScript:void(0);">Mythic</a>
+        </div>
+        <div id="scrollContainer">
+          <ul id="progression" class="heroic">
+            <div id="set1">
+              <li class="normal heroic"><img src="/static/images/bosspics/hellfire-assault.png" /><span>Hellfire Assault</span></li>
+              <li class="normal heroic"><img src="/static/images/bosspics/iron-reaver.png" /><span>Iron Reaver</span></li>
+              <li class="normal heroic"><img src="/static/images/bosspics/hellfire-high-council.png" /><span>Hellfire High Council</span></li>
+            </div>
+            <div id="set2">
+              <li class="normal heroic"><img src="/static/images/bosspics/kilrogg.png" /><span>Kilrogg</span></li>
+              <li class="normal heroic"><img src="/static/images/bosspics/kormrok.png" /><span>Kormrok</span></li>
+              <li class="normal"><img src="/static/images/bosspics/gorefiend.png" /><span>Gorefiend</span></li>
+            </div>
+            <div id="set3">
+              <li class="normal"><img src="/static/images/bosspics/shadow-lord-iskar.png" /><span>Shadow-Lord Iskar</span></li>
+              <li><img src="/static/images/bosspics/socrethar.png" /><span>Socrethar</span></li>
+              <li class="normal"><img src="/static/images/bosspics/fel-lord-zakuun.png" /><span>Fel Lord Zakuun</span></li>
+            </div>
+            <div id="set4">
+              <li><img src="/static/images/bosspics/tyrant-velhari.png" /><span>Tyrant Velhari</span></li>
+              <li><img src="/static/images/bosspics/xhul'horac.png" /><span>Xhul'horac</span></li>
+              <li><img src="/static/images/bosspics/mannoroth.png" /><span>Mannoroth</span></li>
+            </div>
+            <div id="set5">
+              <li><img src="/static/images/bosspics/archimonde.png" /><span>Archimonde</span></li>
+            </div>
+          </ul>
+        </div>
+        <div id="scrollRight" class="scrollButton"><a href="javaScript:void(0);">></a></div>
+        <div id="scrollLeft" class="scrollButton"><a href="javaScript:void(0);"><</a></div>
+      </div>
+    </div>
+    <div id="application" class="section">
+      <div class="content">
+        <h1>Join Our Team</h1>
+        <form id="appForm">
+          <h2>Character Information</h2>
+          <ul>
+            <li>
+              <label for="battleTag">Battletag ID:</label>
+              <input type="text" name="battleTag">
+            </li>
+            <li>
+              <label for="armoryLink">Advanced Armory Link:</label>
+              <input type="text" name="armoryLink">
+            </li>
+            <li>
+              <label for="progress">Current Progress in Tier:</label>
+              <input type="text" name="progress">
+            </li>
+            <li>
+              <label for="otherCharacters">Have you raided with other characters extensively? If yes, please provide armory links:</label>
+              <textarea name="otherCharacters"></textarea>
+            </li>
+          </ul>
+          <h2>About You</h2>
+          <ul>
+            <li>
+              <label for="about">Please tell us a bit about yourself. Including your name, age, what you do (work/school), what other games you like to play, hobbies and other interests outside of WoW.</label>
+              <textarea name="about"></textarea>
+            </li>
+            <li>
+              <label for="hearAboutUs">How did you hear about us? And what made you decide to apply with Tranquil?</label>
+              <input type="text" name="hearAboutUs">
+            </li>
+            <li>
+              <label for="raidTimes">We raid Tuesday/Thursday/Sunday, and occasionally Monday from 6:30 - 9:30 server(PST). How consistently can you make these times?</label>
+              <input type="text" name="raidTimes">
+            </li>
+          </ul>
+          <h2>Raiding Information:</h2>
+          <ul>
+            <li>
+              <label for="guildList">Please list the history of guilds you have been in, along with your raiding history. If you've never been in a raiding guild before, tell us what has caused your decision to apply here.</label>
+              <textarea name="guildList"></textarea>
+            </li>
+            <li>
+              <label for="performance">Because we raid so little each week, we ask that our players spend time outside raids and the game working to improve themselves for our raids. Please explain what you do to improve your performance in general and on specific boss fights.</label>
+              <textarea name="performance"></textarea>
+            </li>
+            <li>
+              <label for="talents">For the better of the raid are you willing to change talents, glyphs, and itemization? How competent are you with a secondary spec and would you feel comfortable playing it for specific fights or other unforseeable reasons?</label>
+              <textarea name="talents"></textarea>
+            </li>
+            <li>
+              <label for="logs">Warcraft Logs link. (Also provide for previous mains.)</label>
+              <textarea name="logs"></textarea>
+            </li>
+          </ul>
+          <h2>Interface &amp; Computer Information</h2>
+          <ul>
+            <li>
+              <label for="ui">Link to your UI. (imgur.com to upload)</label>
+              <input type="text" name="ui">
+            </li>
+            <li>
+              <label for="uiexplain">Please explain why you have your UI setup the way you do. What addons do you consider key to your performance and why?</label>
+              <textarea name="uiexplain"></textarea>
+            </li>
+            <li>
+              <label for="computerspecs">What are the specifications of your computer?</label>
+              <textarea name="computerspecs"></textarea>
+            </li>
+            <li>
+              <label for="pingtest">Please provide your results for a pingtest. www.pingtest.net</label>
+              <input type="text" name="pingtest">
+            </li>
+          </ul>
+          <h2>General Information</h2>
+          <ul>
+            <li>
+              <label for="authenticator">Do you utilize an account authenticator protecting your account from being hacked? (Free app avaliable for most smartphones, or can buy one through the Blizzard store for about $6.)</label>
+              <div class="radioGroup">
+                <span><input type="radio" name="authenticator" value="Yes">Yes</span>
+                <span><input type="radio" name="authenticator" value="No" checked>No</span>
+              </div>
+            </li>
+            <li>
+              <label for="epgp">We use a Ranked EPGP loot system and require our members to download certain addons to help track and distribute loot. Do you have any problems with using these mods?</label>
+              <input type="text" name="epgp">
+            </li>
+            <li>
+              <label for="mumble">Do you currently use voice chat (Mumble specifically)? Do you have any problem with using it for groups/raids?</label>
+              <input type="text" name="mumble">
+            </li>
+            <li>
+              <label for="other">Are there other things you would like us to know? This part gives us a little more insight about who you are. Please feel free to add a joke, give us your life story or relay any imperative information we should know about you.</label>
+              <textarea name="other"></textarea>
+            </li>
+          </ul>
+          <div id="submitApp">
+            <input type="submit" class="button" value="Submit Application">
+          </div>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
