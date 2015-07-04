@@ -19,7 +19,8 @@ var express = require('express'),
     }
   }),
   _ = require('underscore'),
-  basicAuth = require('basic-auth');
+  basicAuth = require('basic-auth'),
+  bunyan = require('bunyan');
 
 var logger = bunyan.createLogger({
   name: 'tranquil-web',
