@@ -21,6 +21,16 @@ var express = require('express'),
   _ = require('underscore'),
   basicAuth = require('basic-auth');
 
+var logger = bunyan.createLogger({
+  name: 'tranquil-web',
+  streams: [
+    {
+      level: 'info',
+      path: config.logfile
+    },
+  ]
+});
+
 var app = express();
 app.set('view engine', 'html');
 app.engine('html', hbs.__express);
@@ -49,7 +59,7 @@ var auth = function (req, res, next) {
 };
 
 var server = app.listen(config.port, function () {
-  console.log('tranquil-web started');
+  logger.info('tranquil-web started');
 });
 
 app.get('/', function (request, response) {
@@ -129,4 +139,10 @@ app.get('/applications/:id/decline', auth, function (request, response) {
       response.sendStatus(200);
     });
   });
+});
+
+app.use(function (error, request, response, next) {
+  logger.error({ req: request, res: response, error: error }, error.stack);
+
+  response.sendStatus(500);
 });
