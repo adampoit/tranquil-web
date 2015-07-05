@@ -35,6 +35,14 @@ var logger = bunyan.createLogger({
   ]
 });
 
+passport.serializeUser(function(user, done) {
+    done(null, user);
+});
+
+passport.deserializeUser(function(obj, done) {
+    done(null, obj);
+});
+
 passport.use(new bnetStrategy({
   clientID: config.bnet.key,
   clientSecret: config.bnet.secret,
