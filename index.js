@@ -20,7 +20,9 @@ var express = require('express'),
   }),
   _ = require('underscore'),
   basicAuth = require('basic-auth'),
-  bunyan = require('bunyan');
+  bunyan = require('bunyan'),
+  passport = require('passport'),
+  bnetStrategy = require('passport-bnet').Strategy;
 
 var logger = bunyan.createLogger({
   name: 'tranquil-web',
@@ -32,13 +34,23 @@ var logger = bunyan.createLogger({
   ]
 });
 
+passport.use(new bnetStrategy({
+  clientID: config.bnet.key,
+  clientSecret: config.bnet.secret,
+  callbackURL: config.bnet.callback
+}, function (accessToken, refreshToken, profile, done) {
+  return done(null, profile);
+}));
+
 var app = express();
 app.set('view engine', 'html');
 app.engine('html', hbs.__express);
 app.use('/static', express.static(__dirname + '/static'));
 app.set('views', __dirname + '/views');
-
 app.use(bodyParser.json());
+app.use(session({ secret: 'blizzard', saveUninitialized: true, resave: true }));
+app.use(passport.initialize());
+app.use(passport.session());
 
 var auth = function (req, res, next) {
   function unauthorized(res) {
@@ -65,6 +77,14 @@ var server = app.listen(config.port, function () {
 
 app.get('/', function (request, response) {
   response.render('index');
+});
+
+app.get('/auth/bnet', passport.authenticate('bnet'));
+
+app.get('/auth/bnet/callback', passport.authenticate('bnet', { failureRedirect: '/' }), function (request, response) {
+  logger.info('auth worked!');
+
+  res.redirect('/');
 });
 
 app.post('/applications', function (request, response) {
