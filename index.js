@@ -21,7 +21,8 @@ var express = require('express'),
   _ = require('underscore'),
   basicAuth = require('basic-auth'),
   bunyan = require('bunyan'),
-  passport = require('passport'),
+  passport = require('passport')
+  session = require('express-session');,
   bnetStrategy = require('passport-bnet').Strategy;
 
 var logger = bunyan.createLogger({
