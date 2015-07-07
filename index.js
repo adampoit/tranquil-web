@@ -88,7 +88,7 @@ var server = app.listen(config.port, function () {
 });
 
 app.get('/', function (request, response) {
-  response.render('index');
+  response.render('index', { isAuthenticated: request.isAuthenticated() });
 });
 
 app.get('/auth/bnet', passport.authenticate('bnet'));

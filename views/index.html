@@ -201,7 +201,6 @@
           <ul>
             <li>Warlock</li>
             <li>Enhancement Shaman</li>
-            <li>Elemental Shaman</li>
             <li>Balance Druid</li>
           </ul>
         </div>
@@ -259,6 +258,7 @@
     <div id="application" class="section">
       <div class="content">
         <h1>Join Our Team</h1>
+        {{#if isAuthenticated}}
         <form id="appForm">
           <h2>Character Information</h2>
           <ul>
@@ -358,6 +358,9 @@
             <input type="submit" class="button" value="Submit Application">
           </div>
         </form>
+        {{else}}
+        <a class="button" href="/auth/bnet">Sign Up With Battle.NET</a>
+        {{/if}}
       </div>
     </div>
   </body>
