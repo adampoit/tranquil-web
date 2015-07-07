@@ -91,7 +91,6 @@ var server = app.listen(config.port, function () {
 });
 
 app.get('/', function (request, response) {
-  logger.log('User is authenticated: ' + request.isAuthenticated());
   response.render('index', { isAuthenticated: request.isAuthenticated() });
 });
 
