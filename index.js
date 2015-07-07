@@ -35,20 +35,23 @@ var logger = bunyan.createLogger({
   ]
 });
 
-passport.serializeUser(function(user, done) {
+passport.serializeUser(function (user, done) {
     done(null, user);
 });
 
-passport.deserializeUser(function(obj, done) {
+passport.deserializeUser(function (obj, done) {
     done(null, obj);
 });
 
 passport.use(new bnetStrategy({
   clientID: config.bnet.key,
   clientSecret: config.bnet.secret,
+  scope: "wow.profile",
   callbackURL: config.bnet.callback
 }, function (accessToken, refreshToken, profile, done) {
-  return done(null, profile);
+  process.nextTick(function () {
+    return done(null, profile);
+  });
 }));
 
 var app = express();
@@ -57,6 +60,7 @@ app.engine('html', hbs.__express);
 app.use('/static', express.static(__dirname + '/static'));
 app.set('views', __dirname + '/views');
 app.use(bodyParser.json());
+
 app.use(session({ secret: 'blizzard', saveUninitialized: true, resave: true }));
 app.use(passport.initialize());
 app.use(passport.session());
