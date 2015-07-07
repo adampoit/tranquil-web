@@ -36,11 +36,12 @@ var logger = bunyan.createLogger({
 });
 
 passport.serializeUser(function (user, done) {
-    done(null, user);
+  logger.info(user);
+  done(null, user);
 });
 
 passport.deserializeUser(function (obj, done) {
-    done(null, obj);
+  done(null, obj);
 });
 
 passport.use(new bnetStrategy({
@@ -49,9 +50,7 @@ passport.use(new bnetStrategy({
   scope: "wow.profile",
   callbackURL: config.bnet.callback
 }, function (accessToken, refreshToken, profile, done) {
-  process.nextTick(function () {
-    return done(null, profile);
-  });
+  return done(null, profile);
 }));
 
 var app = express();
