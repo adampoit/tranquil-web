@@ -51,7 +51,9 @@ passport.use(new bnetStrategy({
   scope: "wow.profile",
   callbackURL: config.bnet.callback
 }, function (accessToken, refreshToken, profile, done) {
-  return done(null, profile);
+  process.nextTick(function () {
+    return done(null, profile);
+  });
 }));
 
 var app = express();
