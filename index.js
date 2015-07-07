@@ -94,8 +94,6 @@ app.get('/', function (request, response) {
 app.get('/auth/bnet', passport.authenticate('bnet'));
 
 app.get('/auth/bnet/callback', passport.authenticate('bnet', { failureRedirect: '/' }), function (request, response) {
-  logger.info('auth worked!');
-
   response.redirect('/');
 });
 
