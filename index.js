@@ -23,7 +23,8 @@ var express = require('express'),
   bunyan = require('bunyan'),
   passport = require('passport')
   session = require('express-session');
-  bnetStrategy = require('passport-bnet').Strategy;
+  bnetStrategy = require('passport-bnet').Strategy,
+  cookieParser = require('cookie-parser');
 
 var logger = bunyan.createLogger({
   name: 'tranquil-web',
@@ -59,7 +60,7 @@ app.engine('html', hbs.__express);
 app.use('/static', express.static(__dirname + '/static'));
 app.set('views', __dirname + '/views');
 app.use(bodyParser.json());
-
+app.use(cookieParser());
 app.use(session({ secret: 'blizzard', saveUninitialized: true, resave: true }));
 app.use(passport.initialize());
 app.use(passport.session());
